@@ -25,17 +25,16 @@ echo "==> Linking project..."
 npx vercel@latest link --yes
 
 echo "==> Setting environment variables..."
-printf '%s' "$MONGODB_URI" | npx vercel@latest env add MONGODB_URI production preview development --force
-printf '%s' "$PROD_SECRET" | npx vercel@latest env add NEXTAUTH_SECRET production preview development --force
+npx vercel@latest env add MONGODB_URI production --value "$MONGODB_URI" --yes --force
+npx vercel@latest env add NEXTAUTH_SECRET production --value "$PROD_SECRET" --yes --force --sensitive
 
 echo "==> Deploying to production..."
-DEPLOY_URL=$(npx vercel@latest deploy --prod --yes)
+npx vercel@latest deploy --prod --yes
 
 echo ""
-echo "Deployment complete!"
-echo "URL: $DEPLOY_URL"
+echo "Live at: https://ganesh-mandal-tracker.vercel.app"
 echo ""
 echo "Next steps:"
-echo "1. Open MongoDB Atlas → Network Access → allow 0.0.0.0/0"
-echo "2. Run: npm run seed  (creates admin user if not exists)"
-echo "3. Login with admin / admin123 and change the password"
+echo "1. MongoDB Atlas → Network Access → allow 0.0.0.0/0"
+echo "2. Run: npm run seed"
+echo "3. Login with admin / admin123"
