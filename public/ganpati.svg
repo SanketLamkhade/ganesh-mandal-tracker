@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FF9933"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="150" fill="#7B1F1F" opacity="0.15"/>
+  <circle cx="200" cy="200" r="130" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <circle cx="200" cy="200" r="110" stroke="#7B1F1F" stroke-width="2" fill="none" opacity="0.4"/>
+  <!-- Ganesh silhouette placeholder -->
+  <ellipse cx="200" cy="160" rx="55" ry="60" fill="#7B1F1F" opacity="0.85"/>
+  <ellipse cx="200" cy="250" rx="70" ry="55" fill="#7B1F1F" opacity="0.75"/>
+  <ellipse cx="130" cy="200" rx="35" ry="20" fill="#7B1F1F" opacity="0.7" transform="rotate(-20 130 200)"/>
+  <ellipse cx="270" cy="200" rx="35" ry="20" fill="#7B1F1F" opacity="0.7" transform="rotate(20 270 200)"/>
+  <text x="200" y="340" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#7B1F1F" font-weight="bold">6M0@ #G6</text>
+  <text x="200" y="368" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#7B1F1F" opacity="0.6">Replace with your photo</text>
+</svg>
