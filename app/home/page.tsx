@@ -43,7 +43,7 @@ export default function HomePage() {
       <div className="animate-fade-in space-y-6 px-4 py-6">
         <div className="grid grid-cols-2 gap-3">
           <StatCard
-            label="Today's Pavti"
+            label="Today's Receipts"
             value={formatCurrency(todayPavti)}
             accent="saffron"
           />
@@ -57,7 +57,7 @@ export default function HomePage() {
         <div className="space-y-4">
           <NavCard
             href="/pavti"
-            title="Pavti"
+            title="Receipt"
             description="Record collection receipts"
             icon="🙏"
             color="saffron"
@@ -68,6 +68,13 @@ export default function HomePage() {
             description="Track mandal expenses"
             icon="💰"
             color="maroon"
+          />
+          <NavCard
+            href="/scanner"
+            title="Scanner"
+            description="PhonePe QR for collections"
+            icon="📱"
+            color="green"
           />
         </div>
       </div>

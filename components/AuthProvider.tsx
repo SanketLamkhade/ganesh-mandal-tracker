@@ -1,16 +1,16 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
-import {
-  clearStoredAuth,
-  setStoredAuth,
-  toStoredAuthUser,
-  type StoredAuthUser,
-} from "@/lib/auth-storage";
 
-const AuthContext = createContext<StoredAuthUser | null>(null);
+interface AuthUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+}
+
+const AuthContext = createContext<AuthUser | null>(null);
 
 export function useAuthUser() {
   return useContext(AuthContext);
@@ -23,25 +23,20 @@ export default function AuthProvider({
   children: React.ReactNode;
   session: Session | null;
 }) {
-  const user = useMemo(
-    () => (session?.user ? toStoredAuthUser(session.user) : null),
-    [session],
-  );
-
-  useEffect(() => {
-    if (user) {
-      setStoredAuth(user);
-      return;
-    }
-
-    clearStoredAuth();
-  }, [user]);
+  const user = useMemo<AuthUser | null>(() => {
+    if (!session?.user?.id) return null;
+    return {
+      id: session.user.id,
+      name: session.user.name ?? null,
+      email: session.user.email ?? null,
+    };
+  }, [session]);
 
   return (
     <SessionProvider
       session={session}
-      refetchInterval={0}
-      refetchOnWindowFocus={false}
+      refetchInterval={5 * 60}
+      refetchOnWindowFocus={true}
     >
       <AuthContext.Provider value={user}>{children}</AuthContext.Provider>
     </SessionProvider>

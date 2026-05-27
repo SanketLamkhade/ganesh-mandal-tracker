@@ -27,6 +27,8 @@ npx vercel@latest link --yes
 echo "==> Setting environment variables..."
 npx vercel@latest env add MONGODB_URI production --value "$MONGODB_URI" --yes --force
 npx vercel@latest env add NEXTAUTH_SECRET production --value "$PROD_SECRET" --yes --force --sensitive
+npx vercel@latest env add NEXTAUTH_URL production --value "https://ganesh-mandal-tracker.vercel.app" --yes --force
+npx vercel@latest env add NEXT_PUBLIC_APP_URL production --value "https://ganesh-mandal-tracker.vercel.app" --yes --force
 
 echo "==> Deploying to production..."
 npx vercel@latest deploy --prod --yes

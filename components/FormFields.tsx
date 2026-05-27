@@ -31,6 +31,8 @@ export function TextInput({
   placeholder,
   type = "text",
   required = true,
+  inputMode,
+  maxLength,
 }: {
   id: string;
   value: string;
@@ -38,6 +40,8 @@ export function TextInput({
   placeholder?: string;
   type?: string;
   required?: boolean;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  maxLength?: number;
 }) {
   return (
     <input
@@ -47,6 +51,8 @@ export function TextInput({
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       required={required}
+      inputMode={inputMode}
+      maxLength={maxLength}
       className="input-field"
     />
   );

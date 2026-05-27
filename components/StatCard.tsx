@@ -32,14 +32,16 @@ interface NavCardProps {
   title: string;
   description: string;
   icon: string;
-  color: "saffron" | "maroon";
+  color: "saffron" | "maroon" | "green";
 }
 
 export function NavCard({ href, title, description, icon, color }: NavCardProps) {
   const bg =
     color === "saffron"
       ? "from-saffron/10 to-saffron/5 border-saffron/30"
-      : "from-maroon/10 to-maroon/5 border-maroon/20";
+      : color === "green"
+        ? "from-leaf-green/10 to-leaf-green/5 border-leaf-green/30"
+        : "from-maroon/10 to-maroon/5 border-maroon/20";
 
   return (
     <Link

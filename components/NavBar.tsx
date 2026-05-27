@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { clearStoredAuth } from "@/lib/auth-storage";
 
 const navItems = [
   { href: "/home", label: "Home", icon: "🏠" },
@@ -35,10 +34,7 @@ export default function NavBar() {
         })}
         <button
           type="button"
-          onClick={() => {
-            clearStoredAuth();
-            signOut({ callbackUrl: "/login" });
-          }}
+          onClick={() => signOut({ callbackUrl: "/login" })}
           className="flex min-h-[52px] min-w-[72px] flex-col items-center justify-center rounded-xl px-4 py-1.5 text-xs font-medium text-maroon/60 transition-colors hover:text-maroon"
         >
           <span className="text-lg">🚪</span>

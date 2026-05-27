@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import { authOptions } from "@/lib/auth";
 import type { PavtiStatus } from "@/models/Pavti";
 
+const MAX_LIST_LIMIT = 100;
+
 export function unauthorizedResponse() {
   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 }
@@ -14,6 +16,37 @@ export function badRequestResponse(message: string) {
 
 export function notFoundResponse() {
   return NextResponse.json({ error: "Not found" }, { status: 404 });
+}
+
+export function tooManyRequestsResponse(
+  message = "Too many requests. Please try again later.",
+) {
+  return NextResponse.json({ error: message }, { status: 429 });
+}
+
+export function serverErrorResponse(
+  message = "Something went wrong. Please try again later.",
+) {
+  return NextResponse.json({ error: message }, { status: 500 });
+}
+
+export function clampLimit(raw: string | null, fallback = 10) {
+  const parsed = Number(raw ?? fallback);
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    return fallback;
+  }
+  return Math.min(Math.floor(parsed), MAX_LIST_LIMIT);
+}
+
+export async function handleApiRoute(
+  handler: () => Promise<NextResponse>,
+): Promise<NextResponse> {
+  try {
+    return await handler();
+  } catch (error) {
+    console.error("API error:", error);
+    return serverErrorResponse();
+  }
 }
 
 export async function requireAuth(): Promise<Session | NextResponse> {
@@ -52,6 +85,7 @@ export interface PavtiInput {
   date: Date;
   recipientName: string;
   address: string;
+  phoneNumber: string;
   amount: number;
 }
 
@@ -106,6 +140,19 @@ export function parsePavtiBody(
     }
   }
 
+  if ("phoneNumber" in body || !partial) {
+    if (!body.phoneNumber && !partial) {
+      return { error: "Missing required fields" };
+    }
+    if (body.phoneNumber !== undefined) {
+      const phoneNumber = String(body.phoneNumber).trim();
+      if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
+        return { error: "Invalid phone number" };
+      }
+      result.phoneNumber = phoneNumber;
+    }
+  }
+
   if ("amount" in body || !partial) {
     if (body.amount === undefined && !partial) {
       return { error: "Missing required fields" };
@@ -123,6 +170,7 @@ export function parsePavtiBody(
       !result.date ||
       !result.recipientName ||
       !result.address ||
+      !result.phoneNumber ||
       result.amount === undefined
     ) {
       return { error: "Missing required fields" };

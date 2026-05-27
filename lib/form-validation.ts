@@ -7,11 +7,16 @@ export function isValidAmount(value: string): boolean {
   return !isNaN(parsed) && parsed > 0;
 }
 
+export function isValidPhoneNumber(value: string): boolean {
+  return /^[6-9]\d{9}$/.test(value.trim());
+}
+
 export function validatePavtiForm(fields: {
   status: string;
   date: string;
   recipientName: string;
   address: string;
+  phoneNumber: string;
   amount: string;
 }): string | null {
   if (!fields.status || !["completed", "pending"].includes(fields.status)) {
@@ -25,6 +30,9 @@ export function validatePavtiForm(fields: {
   }
   if (!isNonEmpty(fields.address)) {
     return "Address is required";
+  }
+  if (!isValidPhoneNumber(fields.phoneNumber)) {
+    return "Valid 10-digit phone number is required";
   }
   if (!isValidAmount(fields.amount)) {
     return "Amount is required and must be greater than 0";
@@ -48,7 +56,7 @@ export function validateExpenseForm(fields: {
     return "Amount is required and must be greater than 0";
   }
   if (!isNonEmpty(fields.paidBy)) {
-    return "Paid by name is required";
+    return "Paid by is required";
   }
   return null;
 }
@@ -60,7 +68,7 @@ export function validateLoginForm(fields: {
   if (!isNonEmpty(fields.username)) {
     return "Username is required";
   }
-  if (!fields.password) {
+  if (!isNonEmpty(fields.password)) {
     return "Password is required";
   }
   return null;

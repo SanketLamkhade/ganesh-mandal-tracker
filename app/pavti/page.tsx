@@ -28,6 +28,7 @@ interface PavtiEntry {
   date: string;
   recipientName: string;
   address: string;
+  phoneNumber: string;
   amount: number;
 }
 
@@ -36,6 +37,7 @@ export default function PavtiPage() {
   const [date, setDate] = useState(todayString());
   const [recipientName, setRecipientName] = useState("");
   const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -87,6 +89,7 @@ export default function PavtiPage() {
       date,
       recipientName,
       address,
+      phoneNumber,
       amount,
     });
     if (validationError) {
@@ -105,6 +108,7 @@ export default function PavtiPage() {
           date,
           recipientName: recipientName.trim(),
           address: address.trim(),
+          phoneNumber: phoneNumber.trim(),
           amount,
         }),
       });
@@ -121,6 +125,7 @@ export default function PavtiPage() {
       setDate(todayString());
       setRecipientName("");
       setAddress("");
+      setPhoneNumber("");
       setAmount("");
       fetchEntries();
     } catch {
@@ -135,7 +140,7 @@ export default function PavtiPage() {
       <LoadingOverlay show={loading} label="Submitting receipt..." />
 
       <div className="px-4 py-6">
-        <FormCard title="New Pavti Entry">
+        <FormCard title="New Receipt Entry">
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -177,6 +182,17 @@ export default function PavtiPage() {
               />
             </FormField>
 
+            <FormField label="Phone Number" id="phoneNumber">
+              <TextInput
+                id="phoneNumber"
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                placeholder="10-digit mobile number"
+                inputMode="numeric"
+                maxLength={10}
+              />
+            </FormField>
+
             <FormField label="Amount" id="amount">
               <AmountInput id="amount" value={amount} onChange={setAmount} />
             </FormField>
@@ -207,7 +223,7 @@ export default function PavtiPage() {
               date: e.date,
               amount: e.amount,
               label: e.recipientName,
-              sublabel: e.address,
+              sublabel: `${e.phoneNumber} · ${e.address}`,
               badge: e.status,
               badgeColor: e.status === "completed" ? "green" : "orange",
             }))}

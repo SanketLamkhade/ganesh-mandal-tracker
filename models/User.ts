@@ -9,9 +9,9 @@ export interface IUser {
 
 const UserSchema = new Schema<IUser>(
   {
-    username: { type: String, required: true, unique: true, trim: true },
-    passwordHash: { type: String, required: true },
-    displayName: { type: String, required: true, trim: true },
+    username: { type: String, required: true, unique: true, trim: true, maxlength: 64 },
+    passwordHash: { type: String, required: true, maxlength: 255 },
+    displayName: { type: String, required: true, trim: true, maxlength: 100 },
   },
   { timestamps: { createdAt: true, updatedAt: false } },
 );

@@ -34,6 +34,7 @@ interface PavtiEntry {
   date: string;
   recipientName: string;
   address: string;
+  phoneNumber?: string;
   amount: number;
 }
 
@@ -116,7 +117,7 @@ export default function ReportsPage() {
           <>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               <StatCard
-                label="Total Pavti"
+                label="Total Receipts"
                 value={formatCurrency(summary.totalPavti)}
                 accent="saffron"
               />
@@ -146,17 +147,17 @@ export default function ReportsPage() {
             </div>
 
             <EntryList
-              title="Pavti in Range"
+              title="Receipts in Range"
               entries={pavtis.map((e) => ({
                 _id: e._id,
                 date: e.date,
                 amount: e.amount,
                 label: e.recipientName,
-                sublabel: e.address,
+                sublabel: e.phoneNumber ? `${e.phoneNumber} · ${e.address}` : e.address,
                 badge: e.status,
                 badgeColor: e.status === "completed" ? "green" : "orange",
               }))}
-              emptyMessage="No pavti entries in this range"
+              emptyMessage="No receipt entries in this range"
             />
 
             <EntryList
