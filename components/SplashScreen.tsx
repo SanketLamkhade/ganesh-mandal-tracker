@@ -5,19 +5,37 @@ import { useEffect, useState } from "react";
 
 const SPLASH_DURATION_MS = 2000;
 
+function isStandalonePwa() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (window.navigator as Navigator & { standalone?: boolean }).standalone ===
+      true
+  );
+}
+
 export default function SplashScreen() {
-  const [visible, setVisible] = useState(true);
+  const [showInAppSplash, setShowInAppSplash] = useState<boolean | null>(null);
 
   useEffect(() => {
+    const standalone = isStandalonePwa();
+
+    if (standalone) {
+      window.location.replace("/login");
+      return;
+    }
+
+    setShowInAppSplash(true);
+
     const timer = window.setTimeout(() => {
-      setVisible(false);
+      setShowInAppSplash(false);
       window.location.replace("/login");
     }, SPLASH_DURATION_MS);
 
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (!visible) {
+  if (showInAppSplash !== true) {
     return null;
   }
 

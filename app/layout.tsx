@@ -23,13 +23,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/Ganpati_Splash_screen.png", sizes: "768x1376", type: "image/png" },
     ],
     apple: [
       {
-        url: "/icons/apple-touch-icon.png",
-        sizes: "180x180",
+        url: "/Ganpati_Splash_screen.png",
+        sizes: "768x1376",
         type: "image/png",
       },
     ],
@@ -38,6 +37,12 @@ export const metadata: Metadata = {
     capable: true,
     title: APP.shortName,
     statusBarStyle: "black-translucent",
+    startupImage: [
+      {
+        url: "/Ganpati_Splash_screen.png",
+        media: "(orientation: portrait)",
+      },
+    ],
   },
   formatDetection: {
     telephone: false,
@@ -48,7 +53,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: APP.themeColor,
+  themeColor: "#5C1515",
 };
 
 export default async function RootLayout({

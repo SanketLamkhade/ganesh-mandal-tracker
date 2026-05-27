@@ -7,8 +7,14 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#5C1515",
-  "theme_color": "#7B1F1F",
+  "theme_color": "#5C1515",
   "icons": [
+    {
+      "src": "/Ganpati_Splash_screen.png",
+      "sizes": "768x1376",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
@@ -22,8 +28,8 @@
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "/Ganpati_Splash_screen.png",
+      "sizes": "768x1376",
       "type": "image/png",
       "purpose": "maskable"
     }
