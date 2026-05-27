@@ -38,13 +38,6 @@ export const metadata: Metadata = {
     capable: true,
     title: APP.shortName,
     statusBarStyle: "black-translucent",
-    startupImage: [
-      {
-        url: "/icons/icon-512.png",
-        media:
-          "(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)",
-      },
-    ],
   },
   formatDetection: {
     telephone: false,
