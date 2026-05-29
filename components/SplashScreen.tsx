@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import MandalAvatar from "@/components/MandalAvatar";
 import { MANDAL } from "@/lib/constants";
 
 const SPLASH_DURATION_MS = 2000;
@@ -32,17 +32,7 @@ export default function SplashScreen() {
       </div>
 
       <div className="relative z-10 flex animate-splash flex-col items-center text-center">
-        <div className="relative h-64 w-64 sm:h-72 sm:w-72">
-          <Image
-            src="/Ganpati_bg2.png"
-            alt="Shree Ganesh"
-            fill
-            priority
-            sizes="(max-width: 640px) 256px, 288px"
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-
+        <MandalAvatar size="lg" priority />
         <h1 className="mt-8 font-heading text-2xl font-bold tracking-wide text-white sm:text-3xl">
           {MANDAL.name}
         </h1>

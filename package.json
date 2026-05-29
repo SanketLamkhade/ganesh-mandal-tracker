@@ -9,7 +9,8 @@
     "lint": "eslint",
     "seed": "tsx scripts/seed-admin.ts",
     "db:setup": "tsx scripts/setup-db.ts",
-    "deploy": "bash scripts/deploy-vercel.sh"
+    "deploy": "bash scripts/deploy-vercel.sh",
+    "icons:generate": "node scripts/generate-app-icons.mjs"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -28,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

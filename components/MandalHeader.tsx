@@ -1,4 +1,4 @@
-import Image from "next/image";
+import MandalAvatar from "@/components/MandalAvatar";
 import { MANDAL } from "@/lib/constants";
 
 export default function MandalHeader() {
@@ -10,14 +10,7 @@ export default function MandalHeader() {
       </div>
 
       <div className="relative mx-auto flex max-w-2xl items-center gap-3">
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-gold">
-          <Image
-            src="/Ganpati_bg.png"
-            alt="Ganpati"
-            fill
-            className="object-cover"
-          />
-        </div>
+        <MandalAvatar size="sm" />
         <div>
           <h1 className="font-heading text-xl font-bold leading-tight sm:text-2xl">
             {MANDAL.name}

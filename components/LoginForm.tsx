@@ -1,9 +1,9 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
+import MandalAvatar from "@/components/MandalAvatar";
 import { validateLoginForm } from "@/lib/form-validation";
 import { MANDAL } from "@/lib/constants";
 
@@ -62,15 +62,7 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-md animate-fade-in">
       <div className="mb-8 flex items-center gap-4">
-        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold shadow-lg ring-2 ring-saffron/30">
-          <Image
-            src="/Ganpati_bg.png"
-            alt="Ganpati"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+        <MandalAvatar size="md" priority />
         <div>
           <h1 className="font-heading text-2xl font-bold text-maroon sm:text-3xl">
             {MANDAL.name}
