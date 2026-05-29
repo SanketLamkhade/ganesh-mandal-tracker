@@ -6,10 +6,23 @@ import { MANDAL } from "@/lib/constants";
 
 const SPLASH_DURATION_MS = 2000;
 
+function isStandalonePwa() {
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (window.navigator as Navigator & { standalone?: boolean }).standalone ===
+      true
+  );
+}
+
 export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    if (isStandalonePwa()) {
+      window.location.replace("/login");
+      return;
+    }
+
     const timer = window.setTimeout(() => {
       setVisible(false);
       window.location.replace("/login");

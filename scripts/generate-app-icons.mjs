@@ -7,7 +7,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const source = join(root, "public/Ganpati_bg.png");
 
-const MAROON = "#5C1515";
 const GOLD = "#D4AF37";
 
 const outputs = [
@@ -21,10 +20,8 @@ const outputs = [
 ];
 
 async function generateIcon(size) {
-  const circleDiameter = Math.round(size * 0.72);
-  const borderWidth = Math.max(2, Math.round(size * 0.018));
-  const ringDiameter = circleDiameter + borderWidth * 2;
-  const offset = Math.round((size - ringDiameter) / 2);
+  const borderWidth = Math.max(2, Math.round(size * 0.06));
+  const circleDiameter = size - borderWidth * 2;
 
   const circularImage = await sharp(source)
     .resize(circleDiameter, circleDiameter, { fit: "cover" })
@@ -47,10 +44,10 @@ async function generateIcon(size) {
     );
 
   const ringSvg = Buffer.from(
-    `<svg width="${ringDiameter}" height="${ringDiameter}">
+    `<svg width="${size}" height="${size}">
       <circle
-        cx="${ringDiameter / 2}"
-        cy="${ringDiameter / 2}"
+        cx="${size / 2}"
+        cy="${size / 2}"
         r="${circleDiameter / 2 + borderWidth / 2}"
         fill="none"
         stroke="${GOLD}"
@@ -66,16 +63,16 @@ async function generateIcon(size) {
       width: size,
       height: size,
       channels: 4,
-      background: MAROON,
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
   })
     .composite([
       {
         input: circularImage,
-        top: offset + borderWidth,
-        left: offset + borderWidth,
+        top: borderWidth,
+        left: borderWidth,
       },
-      { input: ring, top: offset, left: offset },
+      { input: ring, top: 0, left: 0 },
     ])
     .png()
     .toBuffer();
