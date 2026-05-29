@@ -7,7 +7,7 @@ export const MANDAL = {
 export const APP = {
   shortName: "Navyug Mitra Mandal",
   slug: "navyug-mitra-mandal",
-  productionUrl: "https://ganesh-mandal-tracker.vercel.app",
+  productionUrl: "https://navyug-mitra-mandal-tracker.vercel.app",
   description: "Ganesh Mandal collection and expense tracker",
   themeColor: "#7B1F1F",
 } as const;
