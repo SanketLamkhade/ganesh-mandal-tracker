@@ -2,53 +2,51 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { MANDAL } from "@/lib/constants";
 
 const SPLASH_DURATION_MS = 2000;
 
-function isStandalonePwa() {
-  if (typeof window === "undefined") return false;
-  return (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    (window.navigator as Navigator & { standalone?: boolean }).standalone ===
-      true
-  );
-}
-
 export default function SplashScreen() {
-  const [showInAppSplash, setShowInAppSplash] = useState<boolean | null>(null);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const standalone = isStandalonePwa();
-
-    if (standalone) {
-      window.location.replace("/login");
-      return;
-    }
-
-    setShowInAppSplash(true);
-
     const timer = window.setTimeout(() => {
-      setShowInAppSplash(false);
+      setVisible(false);
       window.location.replace("/login");
     }, SPLASH_DURATION_MS);
 
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (showInAppSplash !== true) {
+  if (!visible) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] overflow-hidden bg-[#5C1515]">
-      <Image
-        src="/Ganpati_Splash_screen.png"
-        alt="Navyug Mitra Mandal"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
+      <div className="absolute inset-0 bg-gradient-to-b from-maroon via-[#5C1515] to-maroon" />
+
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full border-2 border-gold" />
+        <div className="absolute bottom-1/4 right-1/4 h-48 w-48 rounded-full border border-gold/60" />
+      </div>
+
+      <div className="relative z-10 flex animate-splash flex-col items-center text-center">
+        <div className="relative h-64 w-64 sm:h-72 sm:w-72">
+          <Image
+            src="/Ganpati_bg2.png"
+            alt="Shree Ganesh"
+            fill
+            priority
+            sizes="(max-width: 640px) 256px, 288px"
+            className="object-contain drop-shadow-2xl"
+          />
+        </div>
+
+        <h1 className="mt-8 font-heading text-2xl font-bold tracking-wide text-white sm:text-3xl">
+          {MANDAL.name}
+        </h1>
+      </div>
     </div>
   );
 }

@@ -10,12 +10,6 @@
   "theme_color": "#5C1515",
   "icons": [
     {
-      "src": "/Ganpati_Splash_screen.png",
-      "sizes": "768x1376",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
@@ -28,8 +22,8 @@
       "purpose": "any"
     },
     {
-      "src": "/Ganpati_Splash_screen.png",
-      "sizes": "768x1376",
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
